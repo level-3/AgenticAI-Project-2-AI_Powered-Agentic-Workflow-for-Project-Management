@@ -118,7 +118,7 @@ class RAGKnowledgePromptAgent:
     and leverages embeddings to respond to prompts based solely on retrieved information.
     """
 
-    def __init__(self, openai_api_key, persona, chunk_size=2000, chunk_overlap=100):
+    def __init__(self, openai_api_key, persona, chunk_size=1000, chunk_overlap=0):
         """
         Initializes the RAGKnowledgePromptAgent with API credentials and configuration settings.
 
@@ -204,13 +204,13 @@ class RAGKnowledgePromptAgent:
             start = end - self.chunk_overlap
             chunk_id += 1
 
-        with open(
-            f"chunks-{self.unique_filename}", "w", newline="", encoding="utf-8"
-        ) as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=["text", "chunk_size"])
-            writer.writeheader()
-            for chunk in chunks:
-                writer.writerow({k: chunk[k] for k in ["text", "chunk_size"]})
+            with open(
+                f"chunks-{self.unique_filename}", "w", newline="", encoding="utf-8"
+            ) as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=["text", "chunk_size"])
+                writer.writeheader()
+                for chunk in chunks:
+                    writer.writerow({k: chunk[k] for k in ["text", "chunk_size"]})
 
         return chunks
 

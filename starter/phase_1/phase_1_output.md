@@ -85,3 +85,13 @@ Routing prompt: One story takes 2 days, and there are 20 stories
 [Router] Best agent: math agent (score=0.130)
 Prompt: One story takes 2 days, and there are 20 stories
 Response: It will take 40 days to complete all 20 stories.
+
+user: level-3 @192.168.68.60 …/AgenticAI-Project-2-AI_Powered-Agentic-Workflow-for-Project-Management/starter/phase_1 [📝🤷✓] via 🐍 v3.13.3 🅒 genAI via  11GiB/94GiB | 0B/100GiB underwent 11s
+✦ [ 16:47:43 ] ➜  python rag_knowledge_prompt_agent.py
+Prompt: What is the podcast that Clara hosts about?
+Response: Dear students,
+
+Clara hosts a podcast called "Crosscurrents" that explores the intersection of science, culture, and ethics. Each week, she interviews researchers, engineers, artists, and activists on a wide range of topics such as brain-computer interfaces, neuroplasticity, climate migration, LLM prompt engineering, decentralized identity, and indigenous knowledge systems. The podcast delves into diverse subjects, offering insights into cutting-edge research and thought-provoking discussions on the impact of science and technology on society.
+
+Best regards,
+Your college professor

@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv("/home/level-3/udacity/AgenticAI/.env/config.env")
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
 openai_api_key = os.getenv("VOCAREUM_API_KEY")
 
 # load the product spec
@@ -191,21 +190,28 @@ routing_agent = RoutingAgent(
 def product_manager_support_function(query):
     print(f"Product Manager Support Function called with query: {query}")
     response = product_manager_knowledge_agent.respond(query)
-    evaluation_response = product_manager_evaluation_agent.evaluate(response)
+    # TODO return only the content from the 'final_response' key.
+    evaluation_response = product_manager_evaluation_agent.evaluate(response)[
+        "final_response"
+    ]
     return evaluation_response
 
 
 def program_manager_support_function(query):
     print(f"Program Manager Support Function called with query: {query}")
     response = program_manager_knowledge_agent.respond(query)
-    evaluation_response = program_manager_evaluation_agent.evaluate(response)
+    evaluation_response = program_manager_evaluation_agent.evaluate(response)[
+        "final_response"
+    ]
     return evaluation_response
 
 
 def development_engineer_support_function(query):
     print(f"Development Engineer Support Function called with query: {query}")
     response = development_engineer_knowledge_agent.respond(query)
-    evaluation_response = development_engineer_evaluation_agent.evaluate(response)
+    evaluation_response = development_engineer_evaluation_agent.evaluate(response)[
+        "final_response"
+    ]
     return evaluation_response
 
 

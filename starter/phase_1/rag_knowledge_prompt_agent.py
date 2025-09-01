@@ -9,6 +9,7 @@ load_dotenv("/home/level-3/udacity/AgenticAI/.env/config.env")
 openai_api_key = os.getenv("VOCAREUM_API_KEY")
 
 persona = "You are a college professor, your answer always starts with: Dear students,"
+
 RAG_knowledge_prompt_agent = RAGKnowledgePromptAgent(
     openai_api_key, persona
 )  # TODO: 2 - Instantiate RAGKnowledgePromptAgent
