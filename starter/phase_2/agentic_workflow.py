@@ -33,14 +33,11 @@ print(f"Product Spec: {product_spec}\n")
 
 # Action Planning Agent
 knowledge_action_planning = (
-    "Stories are defined from a product spec by identifying a "
-    "persona, an action, and a desired outcome for each story. "
-    "Each story represents a specific functionality of the product "
-    "described in the specification. \n"
-    "Features are defined by grouping related user stories. \n"
-    "Tasks are defined for each story and represent the engineering "
-    "work required to develop the product. \n"
-    "A development Plan for a product contains all these components"
+    "Extract exactly 3 high-level workflow steps for Email Router project planning:\n"
+    "1. Generate user stories - create comprehensive user stories for the Email Router product\n"
+    "2. Define product features - create Email Router features with Feature Name, Description, Key Functionality, and User Benefit\n"
+    "3. Create development tasks - create Email Router engineering tasks with Task ID, Title, Description, Acceptance Criteria, Estimated Effort, and Dependencies\n"
+    "Focus specifically on Email Router functionality, not generic examples."
 )
 # TODO: 4 - Instantiate an action_planning_agent using the 'knowledge_action_planning'
 
@@ -109,7 +106,8 @@ program_manager_evaluation_agent = EvaluationAgent(
     "Feature Name: A clear, concise title that identifies the capability\n"
     "Description: A brief explanation of what the feature does and its purpose\n"
     "Key Functionality: The specific capabilities or actions the feature provides\n"
-    "User Benefit: How this feature creates value for the user",
+    "User Benefit: How this feature creates value for the user\n"
+    "Output should only be the content of the feature, without any additional text or formatting.",
     program_manager_knowledge_agent,
     10,
 )
@@ -220,7 +218,7 @@ def development_engineer_support_function(query):
 print("\n*** Workflow execution started ***\n")
 # Workflow Prompt
 # ****
-workflow_prompt = "What would the development tasks for this product be?"
+workflow_prompt = "Create a comprehensive project plan for the Email Router product including user stories, key features, and development tasks."
 # ****
 print(f"Task to complete in this workflow, workflow prompt = {workflow_prompt}")
 
@@ -237,10 +235,37 @@ workflow_steps = action_planning_agent.extract_steps_from_prompt(workflow_prompt
 completed_steps = []
 
 for step in workflow_steps:
+    print("\n==========================")
     print(f"\nExecuting step: {step}")
+    print("==========================\n")
     result = routing_agent.route(step)
     completed_steps.append(result)
-    print(f"Result of step '{step}': {result}")
+    print("\n==========================")
+    print(f"Result of step '{step}':\n{result}")
+    print("==========================\n")
+
 
 print("\n*** Workflow execution completed ***\n")
-print(f"Final output of the workflow: {completed_steps[-1]}")
+print("\n=== COMPREHENSIVE PROJECT PLAN ===\n")
+
+
+print("User Stories:\n")
+for i, step in enumerate(completed_steps):
+    if (
+        "As a" in str(step)
+        and "Feature Name:" not in str(step)
+        and "Task ID:" not in str(step)
+    ):
+        print(f"  {i+1}. {step}")
+
+
+print("\nProduct Features:\n")
+for i, step in enumerate(completed_steps):
+    if "Feature Name:" in str(step):
+        print(f"  {i+1}. {step}")
+
+
+print("\nDevelopment Tasks:\n")
+for i, step in enumerate(completed_steps):
+    if "Task ID:" in str(step):
+        print(f"  {i+1}. {step}")

@@ -320,7 +320,9 @@ class EvaluationAgent:
 
             print(" Step 3: Check if evaluation is positive")
             if evaluation.lower().startswith("yes"):
+                print("\n==========================")
                 print("✅ Final solution accepted.")
+                print("==========================\n")
                 break
             else:
                 print(" Step 4: Generate instructions to correct the response")
